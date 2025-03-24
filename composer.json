@@ -1,0 +1,24 @@
+{
+    "name": "mvc/aeframework",
+    "description": "Main Project",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Illuminates\\": "illuminates/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ahmed Eisa"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=8.0"
+       
+    }
+
+    
+}
