@@ -7,4 +7,6 @@ Route::add('GET', '/', '', function () {
     return "<h1>Home</h1>";
 }, );
 
-Route::add('GET', 'about', HomeController::class, 'about');
+Route::get( 'about',function () {
+    return "<h1>About</h1>";
+} );

@@ -11,13 +11,21 @@ class Router {
         'DELETE' => []
     ];
 
-    // إضافة مسار
-    public static function add(string $method, string $uri, $controller , $action , array $middleware = []) {
+
+    public static function add(string $method, string $uri, $controller , $action  , array $middleware = []) {
         $uri = ltrim($uri, '/');
 
 
 
-        static::$routes[$method][$uri] = compact('controller', 'action', 'middleware');
+        if (is_callable($controller)) {
+            static::$routes[$method][$uri] = [
+                'controller' => $controller,
+                'action' => null,
+                'middleware' => $middleware
+            ];
+        } else {
+            static::$routes[$method][$uri] = compact('controller', 'action', 'middleware');
+        }
     }
 
 
@@ -42,14 +50,18 @@ class Router {
 
         $route = static::$routes[$method][$uri];
 
-        if (is_object($route['action'])) {
+        if (is_callable($route['action'])) {
             $action = $route['action'];
             return $action();
-        } else {
+        } else if ($route['controller'] !== null && method_exists($route['controller'], $route['action'])) {
             $controller = new $route['controller'];
             $action = $route['action'];
             return $controller->$action();
+        } else {
+            http_response_code(500);
+            return "Error: Invalid route action.";
         }
+        
 
     }
 }

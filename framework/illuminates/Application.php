@@ -12,10 +12,16 @@ class Application
 
     public function run()
     {
-        include __DIR__ . '/../routes/web.php';
         
+        $config = config('routes');
+
         
-        
+        foreach ($config['routes'] as $routeFile) {
+            $filePath = base_path("{$config['path']}/{$routeFile}");
+            if (file_exists($filePath)) {
+                include $filePath;
+            }
+        }
     }
 
     public function __destruct()

@@ -6,8 +6,11 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Illuminates\\": "illuminates/"
-        }
+            "Illuminates\\": "framework/illuminates/"
+        },
+        "files": [
+            "framework/helpers/main.php"
+        ]
     },
     "authors": [
         {

@@ -3,13 +3,8 @@
 namespace App\Http\Controllers;
 
 class HomeController {
-    public function index() {
-        return "<h1>Home</h1>
-        <a href='/about'>About</a>";
+    public function index($id) {
+        return "<h1>Home  </h1>. <br> <h2>id: $id</h2>";
     }
 
-    public function about() {
-        return "<h1>About</h1>
-        <a href='/'>Home</a>";
-    }
 }
